@@ -1,0 +1,129 @@
+<style>
+	h1 .date { display: none; }
+	h1 { margin-bottom: 90px; }
+	.content { margin-bottom: 0; }
+</style>
+
+<script>
+	$(document).ready(function(){
+		$('.mask').each(function(){
+			$this = $(this);
+			$.ajax({
+				async: false,
+				url: '/themes/2015.declantyson/' + $this.data('file'), 
+				success: function(data){
+					$this.html(data);
+				}
+			});
+		});
+	});
+	$(window).scroll(function(){
+		var st = $(this).scrollTop();
+		$('.award.awaiting').each(function(){
+			$s = $(this);	
+			if(st >= $s.offset().top - 600) {
+				$s.css({
+					opacity: 1
+				});
+				$s.find('.vignette').css({
+					opacity: 1
+				});
+			}
+		});
+	});
+
+	$('#years span').live('click', function(){
+		$('#years span').removeClass('selected');
+		$(this).addClass('selected');
+		$('.slide').removeClass('open');
+		$('#slide-' + $(this).text()).addClass('open').find('.init').css({
+			opacity: 1
+		});
+		
+		$('#slide-' + $(this).text() +' .award').addClass("awaiting");
+	});
+	
+	$('.next').live('click', function(){
+		$a = $(this).closest('.award');
+		/*$a.animate({
+			marginLeft: $a.data('offset')
+		}, 1000);*/
+		$a.next().css({
+			opacity: 1
+		});
+		$('html, body').animate({
+			scrollTop: $a.next().offset().top - 200
+		});
+		setTimeout(function(){
+			$a.next().find('.vignette').css({
+				opacity: 1
+			});
+		}, 1000);
+	});
+</script>
+
+<div class="col col-100 ui-sortable" id="years">
+	<h2>
+		<span class="selected">Intro</span>
+		<span>2009</span>
+		<span>00s</span>
+		<span>2010</span>
+		<span>2011</span>
+		<span>2012</span>
+		<span>2013</span>
+		<span>2014</span>
+		<span>2015</span>
+	</h2>
+	<div class="clearfix"></div>
+</div>
+
+<div class="content-box col col-100">
+	<div class="col col-100 slide open" id="slide-Intro">
+		<div class="col col-25">
+			<br/>
+		</div>
+		<div class="col col-50">
+			<h3>What are the DEC Awards?</h3>
+			<p>The DEC Awards are pointless, crappy, unprestigous awards I generously bestow to shit that I've enjoyed over the past year. To see previous year's results click the year at the top.</p>
+			<p>&nbsp;</p>
+			<h3>What kind of shit?</h3>
+			<p>Music, games, movies. Y'know, the same old stuff you can read about anywhere else across the site, except it's annual!</p>
+			<p>&nbsp;</p>
+			<h3>I feel like I should really care about this!</h3>
+			<p>You really shouldn't. If you're taking issue or are even mildly interested with what these awards are presented to, I'm worried for your mental health and wellbeing.</p>
+			<p>&nbsp;</p>
+			<h3>I'm really hyped for the next edition! When are the awards held?</h3>
+			<p>In front of the grand total of zero people who read this site at some unspecified point in January of each year.</p>
+		</div>
+		<div class="col col-25">
+			<br/>
+		</div>
+	</div>
+	<div class="col col-100 slide" id="slide-2015">
+		<div class="mask" data-file="awards-2015.html"><!-- style="width:1000%">--></div>
+	</div>	
+	<div class="col col-100 slide" id="slide-2014">
+		<div class="mask" data-file="awards-2014.html"><!-- style="width:1000%">--></div>
+	</div>
+	<div class="col col-100 slide" id="slide-2013">
+		<div class="mask" data-file="awards-2013.html"></div>
+	</div>
+	<div class="col col-100 slide" id="slide-2012">
+		<div class="mask" data-file="awards-2012.html"></div>
+	</div>
+	<div class="col col-100 slide" id="slide-2011">
+		<div class="mask" data-file="awards-2011.html"></div>
+	</div>
+	<div class="col col-100 slide" id="slide-2010">
+		<div class="mask" data-file="awards-2010.html"></div>
+	</div>
+	<div class="col col-100 slide" id="slide-00s">
+		<div class="mask" data-file="awards-00s.html"></div>
+	</div>
+	<div class="col col-100 slide" id="slide-2009">
+		<div class="mask" data-file="awards-2009.html"></div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+	
+<div class="clearfix"></div>
