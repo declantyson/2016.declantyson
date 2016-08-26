@@ -83,7 +83,7 @@ $(document).ready(function(){
             var $listing = $('<div class="listing"/>');
             $listing.attr('data-slug', blog.slug).attr('data-category', blog.category);
             var $featuredImage = $('<img/>').attr('src', '/assets/featured-images/' + blog.slug + '.jpg');
-            var $title = $('<h3/>').text(blog.title);
+            var $title = $('<h3/>').html(blog.title);
             var $clear = $('<div class="clear"/>');
             var $date = $('<span/>').text(blog.date.split(" ")[0]);
 
