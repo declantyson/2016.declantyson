@@ -1,7 +1,7 @@
 /*
 *	2016.declantyson
-*	v1.0.0
-*	23/08/2016
+*	v1.1.22
+*	27/09/2016
 */
 /* LESS Utilities */
 /* Keyframe animations */
@@ -130,6 +130,7 @@ body.sidebar-open .content {
 }
 body.sidebar-open .blog-icon {
   border-color: #fff;
+  right: 30px;
 }
 body.sidebar-open .blog-icon:before {
   color: #fff;
@@ -304,14 +305,15 @@ h3 {
 }
 .sidebar {
   overflow-x: hidden;
+  overflow-y: scroll;
   float: none;
-  width: 360px;
+  width: 100%;
   height: 100%;
-  background-color: #777f8f;
+  background-color: #313843;
   z-index: 2000;
   position: fixed;
   top: 0px;
-  right: -360px;
+  right: -100%;
   transition: right 0.4s ease-out;
   -webkit-transition: right 0.4s ease-out;
   -moz-transition: right 0.4s ease-out;
@@ -402,17 +404,23 @@ h3 {
 .sidebar .listings {
   position: relative;
   height: calc(100% - 148px);
-  transition: left 0.45s linear;
-  -webkit-transition: left 0.45s linear;
-  -moz-transition: left 0.45s linear;
-  -ms-transition: left 0.45s linear;
-  -o-transition: left 0.45s linear;
+  text-align: center;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transition: left 0.65s ease-out;
+  -webkit-transition: left 0.65s ease-out;
+  -moz-transition: left 0.65s ease-out;
+  -ms-transition: left 0.65s ease-out;
+  -o-transition: left 0.65s ease-out;
 }
 .sidebar .listings.after {
-  left: 360px;
+  left: 100%;
 }
 .sidebar .listings.before {
-  left: -360px;
+  left: -100%;
 }
 .sidebar .listings.static {
   left: 0px;
@@ -422,24 +430,8 @@ h3 {
   -ms-transition: none;
   -o-transition: none;
 }
-.sidebar .listings .listing {
-  width: 100%;
-  cursor: pointer;
-}
-.sidebar .listings .listing img {
-  width: 33%;
-  float: left;
-}
-.sidebar .listings .listing h3 {
-  float: left;
-  width: 60%;
-  font-size: 16px;
-  margin: 5px 3%;
-}
-.sidebar .listings .listing h3 span {
-  font-size: 12px;
-  font-style: italic;
-  display: block;
+.sidebar .listings .clearfix {
+  padding: 20px 0;
 }
 .sidebar .new-listings {
   overflow: hidden;
@@ -447,21 +439,27 @@ h3 {
   top: 148px;
   height: calc(100% - 148px);
   width: 100%;
+  text-align: center;
   z-index: -1;
 }
 .sidebar .new-listings.after {
-  left: 360px;
+  left: 100%;
 }
 .sidebar .new-listings.before {
-  left: -360px;
+  left: -100%;
 }
 .sidebar .new-listings.moving {
   left: 0px;
-  transition: left 0.45s linear;
-  -webkit-transition: left 0.45s linear;
-  -moz-transition: left 0.45s linear;
-  -ms-transition: left 0.45s linear;
-  -o-transition: left 0.45s linear;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transition: left 0.75s ease-out;
+  -webkit-transition: left 0.75s ease-out;
+  -moz-transition: left 0.75s ease-out;
+  -ms-transition: left 0.75s ease-out;
+  -o-transition: left 0.75s ease-out;
 }
 .sidebar .new-listings.static {
   transition: none;
@@ -470,23 +468,70 @@ h3 {
   -ms-transition: none;
   -o-transition: none;
 }
+.sidebar .listings .listing,
 .sidebar .new-listings .listing {
-  width: 100%;
+  width: 225px;
+  height: 150px;
+  margin: 1%;
+  cursor: pointer;
+  position: relative;
+  display: none;
+  overflow: hidden;
+  background-color: #000;
 }
+.sidebar .listings .listing.visible,
+.sidebar .new-listings .listing.visible {
+  display: inline-block;
+}
+.sidebar .listings .listing img,
 .sidebar .new-listings .listing img {
-  width: 33%;
+  min-width: 100%;
+  min-height: 100%;
   float: left;
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.25s ease-out;
+  -webkit-transition: all 0.25s ease-out;
+  -moz-transition: all 0.25s ease-out;
+  -ms-transition: all 0.25s ease-out;
+  -o-transition: all 0.25s ease-out;
 }
+.sidebar .listings .listing h3,
 .sidebar .new-listings .listing h3 {
-  float: left;
-  width: 60%;
+  position: absolute;
   font-size: 16px;
   margin: 5px 3%;
+  font-weight: bold;
+  color: #fff;
+  top: 50%;
+  transform: translateY(-50%) scale(0.01) translateZ(0);
+  text-align: center;
+  width: 94%;
+  opacity: 0;
+  transition: all 0.25s ease-out;
+  -webkit-transition: all 0.25s ease-out;
+  -moz-transition: all 0.25s ease-out;
+  -ms-transition: all 0.25s ease-out;
+  -o-transition: all 0.25s ease-out;
 }
+.sidebar .listings .listing h3 span,
 .sidebar .new-listings .listing h3 span {
+  margin-top: 5px;
   font-size: 12px;
   font-style: italic;
   display: block;
+}
+.sidebar .listings .listing:hover img,
+.sidebar .new-listings .listing:hover img {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.25;
+  transform: scale(1.5);
+}
+.sidebar .listings .listing:hover h3,
+.sidebar .new-listings .listing:hover h3 {
+  transform: translateY(-50%) scale(1) translateZ(0);
+  opacity: 1;
 }
 .content-container {
   max-width: 840px;
@@ -1085,11 +1130,11 @@ h3 {
   right: 20px;
   top: 15px;
   cursor: pointer;
-  transition: border-color 0.25s linear;
-  -webkit-transition: border-color 0.25s linear;
-  -moz-transition: border-color 0.25s linear;
-  -ms-transition: border-color 0.25s linear;
-  -o-transition: border-color 0.25s linear;
+  transition: border-color 0.25s linear, right 0.4s ease-out;
+  -webkit-transition: border-color 0.25s linear, right 0.4s ease-out;
+  -moz-transition: border-color 0.25s linear, right 0.4s ease-out;
+  -ms-transition: border-color 0.25s linear, right 0.4s ease-out;
+  -o-transition: border-color 0.25s linear, right 0.4s ease-out;
 }
 .blog-icon:before {
   content: 'Blog';

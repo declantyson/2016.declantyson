@@ -1,7 +1,7 @@
 /*
  *	2016.declantyson
- *	v1.0.0
- *	23/08/2016
+ *	v1.1.6
+ *	27/09/2016
  */
 
 glob = {
@@ -251,9 +251,9 @@ function filterBlogsToCategory(cat, index, current) {
         var $newListing = $(this).clone();
     	$('.new-listings').append($newListing);
         if($newListing.data('category') == cat) {
-            $newListing.show();
+            $newListing.addClass('visible');
         } else {
-            $newListing.hide();
+            $newListing.removeClass('visible');
         }
     });
 
@@ -271,9 +271,10 @@ function filterBlogsToCategory(cat, index, current) {
         setTimeout(function() {
             $('.new-listings').removeClass('moving').addClass('static').removeClass('after').removeClass('before');
             $('.listings').html($('.new-listings').html()).addClass('static').removeClass('after').removeClass('before');
+            $('.listings').append('<div class="clearfix"></div>');
             $('.new-listings').html('').removeClass('static');
             glob.pageswitch = false;
-        }, 430);
+        }, 900);
     },20);
 }
 
