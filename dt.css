@@ -1,7 +1,7 @@
 /*
 *	2016.declantyson
-*	v1.1.22
-*	27/09/2016
+*	v1.1.23
+*	28/09/2016
 */
 /* LESS Utilities */
 /* Keyframe animations */
@@ -381,25 +381,22 @@ h3 {
   -o-transition: left 0.45s ease-in-out;
 }
 .sidebar .sizer.item-0:after {
-  left: 12px;
+  left: 10px;
 }
 .sidebar .sizer.item-1:after {
-  left: 57px;
+  left: 54px;
 }
 .sidebar .sizer.item-2:after {
-  left: 102px;
+  left: 98px;
 }
 .sidebar .sizer.item-3:after {
-  left: 147px;
+  left: 141px;
 }
 .sidebar .sizer.item-4:after {
-  left: 192px;
+  left: 182px;
 }
 .sidebar .sizer.item-5:after {
-  left: 237px;
-}
-.sidebar .sizer.item-6:after {
-  left: 282px;
+  left: 225px;
 }
 .sidebar .listings {
   position: relative;
