@@ -4,75 +4,17 @@
 	.content { margin-bottom: 0; }
 </style>
 
-<script>
-	$(document).ready(function(){
-		$('.mask').each(function(){
-			$this = $(this);
-			$.ajax({
-				async: false,
-				url: '/themes/2015.declantyson/' + $this.data('file'), 
-				success: function(data){
-					$this.html(data);
-				}
-			});
-		});
-	});
-	$(window).scroll(function(){
-		var st = $(this).scrollTop();
-		$('.award.awaiting').each(function(){
-			$s = $(this);	
-			if(st >= $s.offset().top - 600) {
-				$s.css({
-					opacity: 1
-				});
-				$s.find('.vignette').css({
-					opacity: 1
-				});
-			}
-		});
-	});
-
-	$('#years span').live('click', function(){
-		$('#years span').removeClass('selected');
-		$(this).addClass('selected');
-		$('.slide').removeClass('open');
-		$('#slide-' + $(this).text()).addClass('open').find('.init').css({
-			opacity: 1
-		});
-		
-		$('#slide-' + $(this).text() +' .award').addClass("awaiting");
-	});
-	
-	$('.next').live('click', function(){
-		$a = $(this).closest('.award');
-		/*$a.animate({
-			marginLeft: $a.data('offset')
-		}, 1000);*/
-		$a.next().css({
-			opacity: 1
-		});
-		$('html, body').animate({
-			scrollTop: $a.next().offset().top - 200
-		});
-		setTimeout(function(){
-			$a.next().find('.vignette').css({
-				opacity: 1
-			});
-		}, 1000);
-	});
-</script>
-
 <div class="col col-100 ui-sortable" id="years">
 	<h2>
-		<span class="selected">Intro</span>
-		<span>2009</span>
-		<span>00s</span>
-		<span>2010</span>
-		<span>2011</span>
-		<span>2012</span>
-		<span>2013</span>
-		<span>2014</span>
-		<span>2015</span>
+		<span class="selected" data-file="awards-intro.html">Intro</span>
+		<span data-file="awards-2009.html">2009</span>
+		<span data-file="awards-00s.html">00s</span>
+		<span data-file="awards-2010.html">2010</span>
+		<span data-file="awards-2011.html">2011</span>
+		<span data-file="awards-2012.html">2012</span>
+		<span data-file="awards-2013.html">2013</span>
+		<span data-file="awards-2014.html">2014</span>
+		<span data-file="awards-2015.html">2015</span>
 	</h2>
 	<div class="clearfix"></div>
 </div>
@@ -127,3 +69,70 @@
 </div>
 	
 <div class="clearfix"></div>
+
+
+<script>
+	$(document).ready(function(){
+		$('.mask').each(function(){
+			$this = $(this);
+			$.ajax({
+				url: '/themes/2016.declantyson/views/' + $this.data('file'), 
+				success: function(data){
+					$this.html(data);
+				}
+			});
+		});
+	});
+
+	$(window).scroll(function(){
+		var st = $(this).scrollTop();
+		$('.award.awaiting').each(function(){
+			$s = $(this);	
+			if(st >= $s.offset().top - 600) {
+				$s.css({
+					opacity: 1
+				});
+				$s.find('.vignette').css({
+					opacity: 1
+				});
+			}
+		});
+	});
+
+	$('#years span').live('click', function(){
+		$('#years span').removeClass('selected');
+		$(this).addClass('selected');
+		$('.slide').removeClass('open');
+                $this = $(this);
+			$.ajax({
+				url: '/themes/2016.declantyson/views/' + $this.data('file'), 
+				success: function(data){
+
+                                $('#slide-' + $this.text() + ' .mask').html(data);
+		
+		                $('#slide-' + $this.text() +' .award').addClass("awaiting");
+		                $('#slide-' + $this.text()).addClass('open').find('.init').css({
+			             opacity: 1
+		                });
+			}
+		});
+	});
+	
+	$('.next').live('click', function(){
+		$a = $(this).closest('.award');
+		/*$a.animate({
+			marginLeft: $a.data('offset')
+		}, 1000);*/
+		$a.next().css({
+			opacity: 1
+		});
+		$('html, body').animate({
+			scrollTop: $a.next().offset().top - 200
+		});
+		setTimeout(function(){
+			$a.next().find('.vignette').css({
+				opacity: 1
+			});
+		}, 1000);
+	});
+</script>
