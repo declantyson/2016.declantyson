@@ -17,7 +17,8 @@ module.exports = function(grunt) {
                     paths: ['css/*.css']
                 },
                 files : {
-                    'dt.css': 'css/*.less'
+                    'dt.css': 'css/dt.less',
+                    'admin_2017.css': 'css/admin_2017.less'
                 }
             }
 
@@ -43,7 +44,8 @@ module.exports = function(grunt) {
             },
             target: {
                 files : {
-                    'dt.min.css' : 'dt.css'
+                    'dt.min.css' : 'dt.css',
+                    'admin_2017.min.css' : 'admin_2017.css',
                 }
             }
         }
