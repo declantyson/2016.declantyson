@@ -1,7 +1,7 @@
 /*
 *	2016.declantyson
-*	v1.1.23
-*	28/09/2016
+*	v1.1.24
+*	12/10/2016
 */
 
 /* LESS Utilities */
@@ -426,20 +426,21 @@ h3 {
 					display: block;
 				}
 			}
-			&:hover {
-				img {
-					-webkit-filter: grayscale(100%);
-					filter: grayscale(100%);
-					opacity: 0.25;
-					transform: scale(1.5);
-				}
-				h3 {
-					transform: translateY(-50%) scale(1) translateZ(0);
-					opacity: 1;
-				}
-			}
 		}
 	}
+}
+
+.listings .listing:hover {
+    img {
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        opacity: 0.25;
+        transform: scale(1.5);
+    }
+    h3 {
+        transform: translateY(-50%) scale(1) translateZ(0);
+        opacity: 1;
+    }
 }
 
 .content-container {
