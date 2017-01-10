@@ -1,7 +1,7 @@
 /*
 *	2016.declantyson
-*	v1.1.24
-*	12/10/2016
+*	v1.2.0
+*	10/01/2017
 */
 
 /* LESS Utilities */
@@ -30,6 +30,14 @@
 	-moz-transform: @transform;
 	-ms-transform: @transform;
 	-o-transform: @transform;
+}
+
+._transform-origin(@transform-origin) {
+	transform-origin: @transform-origin;
+	-webkit-transform-origin: @transform-origin;
+	-moz-transform-origin: @transform-origin;
+	-ms-transform-origin: @transform-origin;
+	-o-transform-origin: @transform-origin;
 }
 
 ._boxshadow(@components) {
@@ -1240,5 +1248,61 @@ h3 {
 	 #page-The-DEC-Awards .award .vignette {
 		width: 100%;
 		height: 300px !important;
+	}
+}
+
+.latest-entry {
+	position: fixed;
+	z-index: 200;
+	right: 0px;
+	top: 200px;
+	display: none;
+	a {
+		color: #ffffff;
+	}
+	.entry-container {
+		opacity: 0;
+		background: #333;
+		width: 500px;
+		padding: 20px;
+		&.visible {
+			opacity: 1;
+		}
+		img {
+			float: left;
+			padding-right: 20px;
+			width: 150px;
+		}
+		.latest-entry-details {
+			float: left;
+			width: 320px;
+			h3 {
+				font-size: 32px;
+			}
+			p {
+				font-size: 15px;
+				line-height: 18px;
+				font-weight: normal;
+			}
+		}
+	}
+	.revealer {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: @burgundy;
+		._transform(scaleX(0));
+		._transform-origin(100% 0 0);
+		._transition(transform 0.4s ease-in);
+		&.in {
+			._transform(scaleX(1));
+		}
+		&.out {
+			._transition(transform 0.4s ease-in);
+			._transform-origin(0 100% 0);
+			._transform(scaleX(0));
+		}
 	}
 }

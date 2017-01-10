@@ -1,7 +1,7 @@
 /*
  *	2016.declantyson
- *	v1.1.6
- *	27/09/2016
+ *	v1.2.1
+ *	10/01/2017
  */
 
 glob = {
@@ -74,6 +74,53 @@ $(document).ready(function(){
         url: '/json/',
         type: 'GET'
     }).done(function(data){
+        var mostRecent = data[0],
+            mostRecentDateParts = mostRecent.date.split('/'),
+            mostRecentDate = new Date(mostRecentDateParts[1], mostRecentDateParts[0], mostRecentDateParts[2]),
+            newEntry = false;
+
+        if(!localStorage.previousUser) {
+            console.log('first time user!');
+            localStorage.previousUser = true;
+            // first time
+            $('.latest-entry p').text('Welcome to declantyson.net! Here is the latest blog entry so you can get a feel for what kind of person I am.');
+            newEntry = true;
+        } else if(parseInt(localStorage.previousUserDate) < mostRecentDate.getTime()) {
+            // new blog since last visit
+            $('.latest-entry p').text('Welcome back! There\'s been an update since your last visit.');
+            newEntry = true;
+        }
+
+        if(newEntry) {
+            $('.latest-entry a').attr('href', "/" + mostRecent.slug);
+            $('.latest-entry img').attr('src', mostRecent.image);
+            $('.latest-entry h3').html(mostRecent.title);
+            $('.latest-entry h4').html(mostRecent.date.split(" ")[0]);
+
+            $('.latest-entry').show();
+            setTimeout(function () {
+                $('.latest-entry .revealer').addClass('in');
+                setTimeout(function () {
+                    $('.latest-entry .entry-container').addClass('visible');
+                    $('.latest-entry .revealer').removeClass('in').addClass('out');
+                    glob.slideLatestOut = setTimeout(function () {
+                        $('.latest-entry .revealer').removeClass('out').addClass('in');
+                        setTimeout(function () {
+                            $('.latest-entry .entry-container').removeClass('visible');
+                            $('.latest-entry .revealer').addClass('out');
+                            setTimeout(function () {
+                                $('.latest-entry').remove();
+                            }, 400);
+                        }, 400);
+                    }, 5000);
+                }, 400);
+            }, 1000);
+        }
+
+        var visitDate = new Date();
+        localStorage.previousUserDate = visitDate.getTime();
+
+
         for(var i in data) {
             var blog = data[i];
             if(typeof(blogs[blog.category]) == "undefined") {
@@ -142,7 +189,22 @@ $(document).ready(function(){
 
         $('body').removeClass('sidebar-open');
         changePage($e.data('slug'));
-    }); 
+    });
+
+    $('body').on('click', '.latest-entry a', function(e){
+        var $e = $(e.target);
+        clearTimeout(glob.slideLatestOut);
+        $('.latest-entry .revealer').removeClass('out').addClass('in');
+        setTimeout(function () {
+            $('.latest-entry .entry-container').removeClass('visible');
+            $('.latest-entry .revealer').addClass('out');
+            setTimeout(function () {
+                $('.latest-entry').remove();
+            }, 400);
+        }, 400);
+
+        changePage($e.attr('href'));
+    });
 
     $('body').on('click', '.portfolio .col', function(e){
         var $e = $(e.target);
@@ -177,6 +239,7 @@ $(document).ready(function(){
             window.location.hash = "";
         }
     });
+
 });
 
 $(window).resize(function(){

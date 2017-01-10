@@ -42,6 +42,20 @@
 				<span></span>
 				<span></span>
 			</div>
+			<div class="latest-entry">
+				<a>
+					<div class="entry-container">
+						<img/>
+						<div class="latest-entry-details">
+							<h3></h3>
+							<h4></h4>
+							<p></p>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</a>
+				<div class="revealer"></div>
+			</div>
 			<% if(block_footer == 1) { %>
 				<div class="footer">
 					<%= footer_code %>
