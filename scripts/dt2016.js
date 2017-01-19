@@ -1,7 +1,7 @@
 /*
  *	2016.declantyson
- *	v1.2.1
- *	10/01/2017
+ *	v1.2.2
+ *	19/01/2017
  */
 
 glob = {
@@ -76,11 +76,12 @@ $(document).ready(function(){
     }).done(function(data){
         var mostRecent = data[0],
             mostRecentDateParts = mostRecent.date.split('/'),
-            mostRecentDate = new Date(mostRecentDateParts[1], mostRecentDateParts[0], mostRecentDateParts[2]),
+            mostRecentDate = new Date(),
             newEntry = false;
 
+        mostRecentDate.setFullYear(parseInt(mostRecentDateParts[2]), parseInt(mostRecentDateParts[1]) - 1, parseInt(mostRecentDateParts[0]));
+
         if(!localStorage.previousUser) {
-            console.log('first time user!');
             localStorage.previousUser = true;
             // first time
             $('.latest-entry p').text('Welcome to declantyson.net! Here is the latest blog entry so you can get a feel for what kind of person I am.');
@@ -90,6 +91,7 @@ $(document).ready(function(){
             $('.latest-entry p').text('Welcome back! There\'s been an update since your last visit.');
             newEntry = true;
         }
+
 
         if(newEntry) {
             $('.latest-entry a').attr('href', "/" + mostRecent.slug);
